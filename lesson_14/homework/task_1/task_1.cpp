@@ -1,7 +1,26 @@
 ﻿#include <iostream>
 #include<string>
 
-//int mystrcmp(const char* str1, const char* str2);
+
+int mystrcmp(const char* str1, const char* str2)
+{
+    if (*str1 == *str2)
+    {
+        return 0;
+    }
+
+    size_t length_1 = strlen(str1);
+    size_t length_2 = strlen(str2);
+    if (length_1 > length_2)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 
 int StringToNumber(std::string str)
 {
@@ -23,9 +42,9 @@ std::string NumberToString(int number)
     return str;
 }
 
-void Uppercase(std::string str1)
+void Uppercase(char* str1)
 {
-    size_t length = str1.size() - 1;
+    size_t length = strlen(str1) - 1;
 
     for (size_t i = 0; i < length; ++i)
         if (str1[i] < 'z' && str1[i] > 'a')
@@ -34,9 +53,9 @@ void Uppercase(std::string str1)
         }
 }
 
-void Lowercase(std::string str1)
+void Lowercase(char* str1)
 {
-    size_t length = str1.size() - 1;
+    size_t length = strlen(str1) - 1;
 
     for (size_t i = 0; i < length; ++i)
         if (str1[i] < 'Z' && str1[i] > 'A')
@@ -47,11 +66,14 @@ void Lowercase(std::string str1)
 
 void mystrrev(char* str)
 {
-   // reverse()
+    size_t length = strlen(str) - 1;
+    for (size_t i = 0; i <= (length / 2); ++i)
+    {
+        std::swap(str[i], str[length - i]);
+    }
+
 }
 int main()
 {
-    std::cout << NumberToString(123);
-
     return 0;
 }
