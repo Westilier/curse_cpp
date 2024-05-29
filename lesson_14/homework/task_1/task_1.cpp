@@ -26,7 +26,6 @@ int StringToNumber(std::string str)
 {
     size_t number = 0;
     size_t length = str.size() - 1;
-
     for (size_t i = 0; i < length; ++i)
     {
         number = number * 10 + str[i] - '0';
@@ -45,7 +44,6 @@ std::string NumberToString(int number)
 void Uppercase(char* str1)
 {
     size_t length = strlen(str1) - 1;
-
     for (size_t i = 0; i < length; ++i)
         if (str1[i] < 'z' && str1[i] > 'a')
         {
@@ -56,7 +54,6 @@ void Uppercase(char* str1)
 void Lowercase(char* str1)
 {
     size_t length = strlen(str1) - 1;
-
     for (size_t i = 0; i < length; ++i)
         if (str1[i] < 'Z' && str1[i] > 'A')
         {
