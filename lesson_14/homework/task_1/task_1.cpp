@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include<string>
 
-int mystrcmp(const char* str1, const char* str2);
+//int mystrcmp(const char* str1, const char* str2);
 
 int StringToNumber(std::string str)
 {
@@ -47,7 +47,7 @@ void Lowercase(std::string str1)
 
 void mystrrev(char* str)
 {
-    reverse()
+   // reverse()
 }
 int main()
 {
