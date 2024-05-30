@@ -4,9 +4,8 @@
 
 int main()
 {
-    std::string str = " 1 3 3";
+    std::string str = "1 2 3 4";
     size_t length = str.size();
-
     for (size_t i = 0; i < length; ++i)
     {
         if (str[i] == ' ')
@@ -15,6 +14,4 @@ int main()
         }
     }
     std::cout << str;
-
-    return 0;
 }
