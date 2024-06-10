@@ -81,12 +81,9 @@ std::vector<int> FindingCommonValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
                     {
                         for (size_t j_C = 0; j_C < C[0].size(); ++j_C)
                         {
-                            if ((A[i_A][j_A] == B[i_B][i_B]) )
+                            if ((A[i_A][j_A] == B[i_B][i_B]) && (A[i_A][j_A] == C[i_C][j_C]))
                             {
-                                if (A[i_A][j_A] == C[i_C][j_C])
-                                {
-                                    findingValues.push_back(A[i_A][j_A]);
-                                }
+                                findingValues.push_back(A[i_A][j_A]);
                             }
                         }
                     }
@@ -119,44 +116,44 @@ bool IsNotInMatrix(int element, Matrix matrix)
     return true;
 }
 
+std::vector<int> NotFindingElementOfMatrixInOtherMatrix(Matrix& matrix_1, Matrix& matrix_2, Matrix& matrix_3)
+{
+    std::vector<int> findingValues;
+
+    for (size_t i = 0; i < matrix_1.size(); ++i)
+    {
+        for (size_t j = 0; j < matrix_1[0].size(); ++j)
+        {
+            if ((IsNotInMatrix(matrix_1[i][j], matrix_2)) && (IsNotInMatrix(matrix_1[i][j], matrix_3)))
+            {
+                findingValues.push_back(matrix_1[i][j]);
+            }
+        }
+    }
+    return findingValues;
+}
+
 std::vector<int> FindingUniqueValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
 {
     std::vector<int> findingValues;
 
-    for (size_t i = 0; i < A.size(); ++i)
-    {
-        for (size_t j = 0; j < A[0].size(); ++j)
-        {
-            if ((IsNotInMatrix(A[i][j], B)) && (IsNotInMatrix(A[i][j], C)))
-            {
-                findingValues.push_back(A[i][j]);
-            }
-        }
-    }
+    std::vector<int> findingValuesMatrixA = NotFindingElementOfMatrixInOtherMatrix(A,B,C);
+    findingValues.insert(findingValues.end(), findingValuesMatrixA.begin(), findingValuesMatrixA.end());
 
-    for (size_t i = 0; i < B.size(); ++i)
-    {
-        for (size_t j = 0; j < B[0].size(); ++j)
-        {
-            if ((IsNotInMatrix(B[i][j], A)) && (IsNotInMatrix(B[i][j], C)))
-            {
-                findingValues.push_back(B[i][j]);
-            }
-        }
-    }
+    std::vector<int> findingValuesMatrixB = NotFindingElementOfMatrixInOtherMatrix(A, B, C);
+    findingValues.insert(findingValues.end(), findingValuesMatrixB.begin(), findingValuesMatrixB.end());
 
-    for (size_t i = 0; i < C.size(); ++i)
+    std::vector<int> findingValuesMatrixC = NotFindingElementOfMatrixInOtherMatrix(A, B, C);
+    findingValues.insert(findingValues.end(), findingValuesMatrixC.begin(), findingValuesMatrixC.end());
+
+    if (findingValues.empty())
     {
-        for (size_t j = 0; j < C[0].size(); ++j)
-        {
-            if ((IsNotInMatrix(C[i][j], B)) && (IsNotInMatrix(C[i][j], A)))
-            {
-                findingValues.push_back(C[i][j]);
-            }
-        }
+        return findingValues;
     }
-   
-    return DeleteRepetitionsInVector(findingValues);
+    else
+    {
+        return DeleteRepetitionsInVector(findingValues);
+    }
 }
 
 std::vector<int> FindingCommonValuesInTwoMatrixs(Matrix& A, Matrix& C)
@@ -203,6 +200,7 @@ std::vector<int> NegativeValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
             }
         }
     }
+
     for (size_t i = 0; i < B.size(); ++i)
     {
         for (size_t j = 0; j < B[0].size(); ++j)
@@ -213,6 +211,7 @@ std::vector<int> NegativeValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
             }
         }
     }
+
     for (size_t i = 0; i < C.size(); ++i)
     {
         for (size_t j = 0; j < C[0].size(); ++j)
@@ -223,6 +222,7 @@ std::vector<int> NegativeValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
             }
         }
     }
+
     if (findingValues.empty())
     {
         return findingValues;
@@ -232,6 +232,7 @@ std::vector<int> NegativeValuesInMatrixs(Matrix& A, Matrix& B, Matrix& C)
         return DeleteRepetitionsInVector(findingValues);
     }
 }
+
 int main()
 {
     setlocale(LC_ALL, "rus");
