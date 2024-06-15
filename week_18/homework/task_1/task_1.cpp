@@ -6,9 +6,12 @@
 void SortAscending(std::vector<std::string>& surnames)
 {
     size_t count = surnames.size();
-    for (size_t i = 0; i < count; i++) {
-        for (size_t j = 0; j < count-1; j++) {
-            if (surnames[j] > surnames[j + 1]) {
+    for (size_t i = 0; i < count; i++) 
+    {
+        for (size_t j = 0; j < count-1; j++) 
+        {
+            if (surnames[j] > surnames[j + 1]) 
+            {
                 std::swap(surnames[j], surnames[j + 1]);
             }
         }

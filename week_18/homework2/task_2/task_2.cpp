@@ -12,7 +12,7 @@ struct car {
     std::string gearboxType;
 };
 
-car initialization(car car)
+void initialization(car& car)
 {
     std::cout << "Введите длину автомобиля ";
     getline(std::cin, car.length);
