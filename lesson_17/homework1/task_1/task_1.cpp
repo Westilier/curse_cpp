@@ -1,28 +1,28 @@
 ﻿#include <iostream>
 
 
-void AddColInTwiceArray(size_t** arr, size_t* cols, size_t* rows, size_t position)//фунция из задания
+void AddColInMatrix(size_t** arr, size_t& cols, size_t& rows, size_t position)//фунция из задания
 {
-    *cols += 1;
-    arr[*cols - 1] = new size_t[*rows];
-    for (size_t i = *cols - 1; i > position; --i)
+    cols += 1;
+    arr[cols - 1] = new size_t[rows];
+    for (size_t i = cols - 1; i > position; --i)
     {
-        for (size_t j = 0; j < *rows; ++j)
+        for (size_t j = 0; j < rows; ++j)
         {
             arr[j][i] = arr[j][i - 1];
         }
     }
-    for (size_t i = 0; i < *rows; ++i)
+    for (size_t i = 0; i < rows; ++i)
     {
         arr[i][position] = 0;
     }
 }
 
-void OutputTwiceArray(size_t** arr, size_t* cols, size_t* rows)
+void OutputMatrix(size_t** arr, size_t& cols, size_t& rows)
 {
-    for (size_t i = 0; i < *rows; ++i)
+    for (size_t i = 0; i < rows; ++i)
     {
-        for (size_t j = 0; j < *cols; ++j)
+        for (size_t j = 0; j < cols; ++j)
         {
             std::cout << arr[i][j] << " ";
         }
@@ -30,12 +30,12 @@ void OutputTwiceArray(size_t** arr, size_t* cols, size_t* rows)
     }
 }
 
-void InitializationTwiceArray(size_t** arr, size_t* cols, size_t* rows)
+void InitializationMatrix(size_t** arr, size_t& cols, size_t& rows)
 {
     size_t x = 1;
-    for (size_t i = 0; i < *rows; ++i)
+    for (size_t i = 0; i < rows; ++i)
     {
-        for (size_t j = 0; j < *cols; ++j)
+        for (size_t j = 0; j < cols; ++j)
         {
             arr[i][j] = x++;
         }
@@ -45,23 +45,21 @@ void InitializationTwiceArray(size_t** arr, size_t* cols, size_t* rows)
 int main()
 {
     size_t rows = 5;
-    size_t* ptrrows = &rows;
     size_t cols = 5;
-    size_t* ptrcols = &cols;
     size_t** array = new size_t* [cols];
     for (size_t i = 0; i < cols; i++)
     {
         array[i] = new size_t[rows];
     }
 
-    InitializationTwiceArray(array, ptrcols, ptrrows);
+    InitializationMatrix(array, cols, rows);
 
-    OutputTwiceArray(array, ptrcols, ptrrows);
+    OutputMatrix(array, cols, rows);
 
     size_t position = 3;
-    AddColInTwiceArray(array, ptrcols, ptrrows, position);
+    AddColInMatrix(array, cols, rows, position);
 
-    OutputTwiceArray(array, ptrcols, ptrrows);
+    OutputMatrix(array, cols, rows);
 
     return 0;
 }
