@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 
+#include "Windows.h"
+
 
 size_t CounterWordInText(std::string& text,std::string& searchWord)
 {
@@ -55,18 +57,28 @@ void ReverseEverySentenceInText(std::string& text)
 {
     size_t startSentence = 0;
     size_t endSentence;
+
     for (size_t i = 0; i < text.size(); ++i)
     {
         if (text[i] == '.')
         {
-            reverse(str)
+            endSentence = i;
+            if (startSentence < endSentence)
+            {
+                std::string sentence = text.substr(startSentence, endSentence - startSentence + 1);
+                reverse(sentence.begin(), sentence.end());
+                text.replace(startSentence, sentence.size(), sentence);
+
+                startSentence = i+1;
+            }
         }
     }
 }
 
 int main()
 {
-    setlocale(LC_ALL, "rus");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
     std::string str = "Lorem ipsum dolor sit amet. Quis nostrud exercitation. Ullamco laboris nisi ut aliquip. Ex ea commodo consequat. ";
     
@@ -74,10 +86,15 @@ int main()
     std::string searchWord;
     getline(std::cin, searchWord);
     std::cout << CounterWordInText(str, searchWord) << std::endl;
+
     std::cout << CounterSentenceInText(str) << std::endl;
+
     std::cout << CounterDotAndCommaInText(str) << std::endl;
+
     ReverseFullText(str);
     std::cout << str<<std::endl;
 
+    ReverseEverySentenceInText(str);
+    std::cout << str<<std::endl;
     return 0;
 }
