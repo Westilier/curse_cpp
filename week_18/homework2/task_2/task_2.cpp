@@ -6,13 +6,13 @@ struct car {
     std::string length;
     std::string clearance;
     std::string engineCapacity;
-    std::string powerEngine;
-    std::string wheelDiameter;
+    double powerEngine;
+    double wheelDiameter;
     std::string color;
     std::string gearboxType;
 };
 
-void initialization(car& car)
+void Initialization(car& car)
 {
     std::cout << "Введите длину автомобиля ";
     getline(std::cin, car.length);
@@ -21,16 +21,16 @@ void initialization(car& car)
     std::cout << "Введите объём двигателя автомобиля ";
     getline(std::cin, car.engineCapacity);
     std::cout << "Введите мощность двигателя автомобиля ";
-    getline(std::cin, car.powerEngine);
+    std::cin >> car.powerEngine;
     std::cout << "Введите диаметр колес автомобиля ";
-    getline(std::cin, car.wheelDiameter);
+    std::cin >> car.wheelDiameter;
     std::cout << "Введите цвет автомобиля (в И.п) ";
     getline(std::cin, car.color);
     std::cout << "Введите тип коробки передач автомобиля (первые 3 буквы) ";
     getline(std::cin, car.gearboxType);
 }
 
-void OutputCar(car car)
+void OutputCar(car const& car)
 {
     std::cout << "Длину автомобиля " << car.length << std::endl;
     std::cout << "Клиренс автомобиля" << car.clearance << std::endl;
@@ -45,31 +45,13 @@ int SearchByValue(std::vector<car> cars, std::string value)
 {
     for (size_t i = 0; i < cars.size(); ++i)
     {
-        if (cars[i].length == value)
-        {
-            return i;
-        }
-        else if (cars[i].clearance == value)
-        {
-            return i;
-        }
-        else if (cars[i].engineCapacity == value)
-        {
-            return i;
-        }
-        else if (cars[i].powerEngine == value)
-        {
-            return i;
-        }
-        else if (cars[i].wheelDiameter == value)
-        {
-            return i;
-        }
-        else if (cars[i].color == value)
-        {
-            return i;
-        }
-        else if (cars[i].gearboxType == value)
+        if ((cars[i].length == value)
+            || (cars[i].clearance == value)
+            || (cars[i].engineCapacity == value)
+            || (cars[i].powerEngine == std::stod(value))
+            || (cars[i].wheelDiameter == std::stod(value))
+            || (cars[i].color == value)
+            || (cars[i].gearboxType == value))
         {
             return i;
         }
