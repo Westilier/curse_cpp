@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.34301.259
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lesson_15", "lesson_15", "{658925D8-4DC5-4000-A4FD-6601BA16FF36}"
 EndProject
@@ -96,6 +96,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "task_2", "week_18\practice_2\task_2\task_2.vcxproj", "{2D885FB5-DD3B-4B0A-ABBA-B719419DFB62}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "task_3", "week_18\practice_2\task_3\task_3.vcxproj", "{66C148F3-36F5-4531-9154-D30263BE47DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "week_20", "week_20", "{E60FAB98-39D6-444F-A810-EA81BC8BF75C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "homework", "homework", "{CFD99262-7001-48EB-ADE1-5785B759C136}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "task_1", "week_20\homework\task_1\task_1.vcxproj", "{45A0280D-CB36-435F-9A63-C5DE28CBD32A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -329,6 +335,14 @@ Global
 		{66C148F3-36F5-4531-9154-D30263BE47DA}.Release|x64.Build.0 = Release|x64
 		{66C148F3-36F5-4531-9154-D30263BE47DA}.Release|x86.ActiveCfg = Release|Win32
 		{66C148F3-36F5-4531-9154-D30263BE47DA}.Release|x86.Build.0 = Release|Win32
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Debug|x64.ActiveCfg = Debug|x64
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Debug|x64.Build.0 = Debug|x64
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Debug|x86.ActiveCfg = Debug|Win32
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Debug|x86.Build.0 = Debug|Win32
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Release|x64.ActiveCfg = Release|x64
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Release|x64.Build.0 = Release|x64
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Release|x86.ActiveCfg = Release|Win32
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -375,6 +389,8 @@ Global
 		{155FD64E-B00F-4876-A63C-17D3645CA654} = {89399E92-F443-411E-B8D3-535111984E19}
 		{2D885FB5-DD3B-4B0A-ABBA-B719419DFB62} = {89399E92-F443-411E-B8D3-535111984E19}
 		{66C148F3-36F5-4531-9154-D30263BE47DA} = {89399E92-F443-411E-B8D3-535111984E19}
+		{CFD99262-7001-48EB-ADE1-5785B759C136} = {E60FAB98-39D6-444F-A810-EA81BC8BF75C}
+		{45A0280D-CB36-435F-9A63-C5DE28CBD32A} = {CFD99262-7001-48EB-ADE1-5785B759C136}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E1B190D7-0FDC-4F3B-8BAF-BA515E9F7664}
