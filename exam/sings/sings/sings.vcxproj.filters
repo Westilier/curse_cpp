@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Sings">
+      <UniqueIdentifier>{51037c56-0468-468e-8268-fa6a8386c674}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sings.cpp">
@@ -21,7 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sings.txt" />
-    <Text Include="temp.txt" />
     <Text Include="anotherText.txt" />
   </ItemGroup>
 </Project>
