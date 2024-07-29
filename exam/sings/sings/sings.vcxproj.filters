@@ -23,7 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Sings.txt" />
     <Text Include="anotherText.txt" />
   </ItemGroup>
 </Project>
