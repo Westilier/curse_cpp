@@ -4,12 +4,18 @@
 #include <queue>
 #include "windows.h"
 #include <string>
-
-#include <map>
 #include <ctime>
 
 using Matrix = std::vector<std::vector<size_t>>;
 using Hash = std::string;
+
+enum Keys {
+    Down = 72,
+    Right = 75,
+    Left = 77,
+    Up = 80,
+    Exit = 48
+};
 
 struct StateNode
 {
@@ -156,11 +162,12 @@ std::vector<StateNode> min_priority_queue;
 
 void PrintWayToSolve(std::vector<Matrix>& way)
 {
+    size_t delayInMilliseconds = 1000;
     size_t size = way.size();
     size_t i=0;
     while(i<size)
     {
-        Sleep(1000);
+        Sleep(delayInMilliseconds);
         PrintMap(way[i]);
         std::cout << std::endl;
         i++;
@@ -174,7 +181,6 @@ void ExpandNodes(StateNode& node,Hash& hash)
     size_t zeroCol = node.Zero_x;
     size_t zeroRow = node.Zero_y;
 
-    //Left
     if (zeroCol > 0)
     {
         Matrix newMap = node.Map;
@@ -192,7 +198,6 @@ void ExpandNodes(StateNode& node,Hash& hash)
         }
     }
 
-    // Right
     if (zeroCol < size - 1)
     {
         Matrix newMap = node.Map;
@@ -210,7 +215,6 @@ void ExpandNodes(StateNode& node,Hash& hash)
         }
     }
 
-    // Up
     if (zeroRow > 0)
     {
         Matrix newMap = node.Map;
@@ -228,7 +232,6 @@ void ExpandNodes(StateNode& node,Hash& hash)
         }
     }
 
-    // Down
     if (zeroRow < size - 1)
     {
 
@@ -319,14 +322,7 @@ bool IsPossibleMap(StateNode& node)
     size_t size = node.Map.size();
     size_t inversions = CountInversions(node.Map);
     FindingZero(node);
-    if ((inversions + size + node.Zero_y) % 2 == 1)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    return ((inversions + size + node.Zero_y) % 2 == 1);
 }
 
 void UpMove(StateNode& node) // ход вверх 
@@ -372,36 +368,36 @@ void LeftMove(StateNode& node) // ход влево
 
 bool GetDirection(StateNode& node)
 {
-    int move = static_cast<int> (_getch());
-    if(move == 48)
+    int move = static_cast<Keys> (_getch());
+    if(move == Exit)
     {
         return false;
     }
-    move = static_cast<int> (_getch()); 
+    move = static_cast<Keys> (_getch());
 
     switch (move)
     {
-        case 72:
+        case Down:
         {
             DownMove(node);
             break;
         }
-        case 80:
+        case Up:
         {
             UpMove(node);
             break;
         }
-        case 77:
+        case Left:
         {
             LeftMove(node);
             break;
         }
-        case 75:
+        case Right:
         {
             RightMove(node);
             break;
         }
-        case 48:
+        case Exit:
         {
             return false;
         }
@@ -417,6 +413,7 @@ std::size_t HumanColect(StateNode& currentState)
     do
     {
         count++;
+        std::cout << std::endl;
         PrintMap(currentState.Map);
         isGetDirection = GetDirection(currentState);
     }
@@ -471,7 +468,7 @@ StateNode ComputerMixMap(size_t& size)
 
 void Menu()
 {
-    std::cout << "Выберите режим" << std::endl //size map
+    std::cout << "Выберите режим" << std::endl
             << "1 - 3 на 3" << std::endl
             << "2 - 4 на 4" << std::endl
             << "3 - Выход" << std::endl;
@@ -491,7 +488,7 @@ void Menu()
         return ;
     }
 
-    std::cout << "Выберите режим" << std::endl //mixxing
+    std::cout << "Выберите режим" << std::endl
         << "1 - Ручное размешивание" << std::endl
         << "2 - Компьютерное размешивание" << std::endl
         << "3 - Выход" << std::endl;
@@ -511,7 +508,7 @@ void Menu()
         return ;
     }
 
-    if (size == 3)//Collecting
+    if (size == 3)
     {
         std::cout << "Выберите режим" << std::endl
             << "1 - Человек собирает" << std::endl
