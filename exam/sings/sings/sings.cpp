@@ -4,8 +4,18 @@
 #include <windows.h>
 #include <filesystem>
 
+enum keys {
+    Add = 1,
+    EditText = 2,
+    DeleteText = 3,
+    SaveText = 4,
+    PrintText = 5,
+    PrintByAuthor = 6,
+    PrintByWord = 7,
+    Exit = 0
+};
 
-bool IsFileByPath(std::string path)
+bool IsFileByPath(std::string const& path)
 {
     for (const auto& entry : std::filesystem::directory_iterator("Sings"))
     {
@@ -18,7 +28,7 @@ bool IsFileByPath(std::string path)
     return false;
 }
 
-void InputTextInFile(std::string path)
+void InputTextInFile(std::string const& path)
 {
     std::fstream Sing(path,std::ios::app);
     std::string buffer;
@@ -67,7 +77,27 @@ void InputTextInFile(std::string path)
     } while (key != 1 && key != 2);
 }
 
-void AddSing(std::string Directory)
+std::string InputSingName(std::string const& Directory)
+{
+    std::string NameSing;
+    std::cout << "Название песни:" << std::endl;
+    getline(std::cin, NameSing);
+    std::string pathToSing = Directory + "\\" + NameSing;
+
+    return pathToSing;
+}
+
+std::string InputSingAuthor(std::string const& Directory)
+{
+    std::string AuthorSing;
+    std::cout << "Автор песни:" << std::endl;
+    getline(std::cin, AuthorSing);
+    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
+
+    return AuthorSingForSearch;
+}
+
+void AddSing(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
     std::string buffer;
@@ -96,20 +126,14 @@ void AddSing(std::string Directory)
     InputTextInFile(path);
 }
 
-void DeleteTextSing(std::string Directory)
+void DeleteTextSing(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
-    std::string NameSing;
-    std::cout << "Название песни:" << std::endl;
-    getline(std::cin, NameSing);
-    std::string pathToSing = Directory + "\\" + NameSing;
 
-    std::string AuthorSing;
-    std::cout << "Автор песни:" << std::endl;
-    getline(std::cin, AuthorSing);
-    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
+    std::string pathToSing = InputSingName(Directory);
+    std::string AuthorSingForSearch = InputSingAuthor(Directory);
 
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -131,22 +155,15 @@ void DeleteTextSing(std::string Directory)
     std::cout << "Песня не была найдена" << std::endl;
 }
 
-void EditTextInFile(std::string Directory) 
+void EditTextInFile(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
-    std::string NameSing;
-    std::cout << "Название песни:" << std::endl;
-    getline(std::cin, NameSing);
-    std::string pathToSing = Directory + "\\" + NameSing;
 
-    std::string AuthorSing;
-    std::cout << "Автор песни:" << std::endl;
-    getline(std::cin, AuthorSing);
-    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
-
+    std::string pathToSing = InputSingName(Directory);
+    std::string AuthorSingForSearch = InputSingAuthor(Directory);
     std::string tempPath = Directory + "\\" + "temp.txt";
 
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -181,27 +198,22 @@ void EditTextInFile(std::string Directory)
     std::cout << "Песня не была найдена" << std::endl;
 }
 
-void SaveTextSingInFile(std::string Directory)
+void SaveTextSingInFile(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
+
     bool isFindingSing = false;
     bool isNotFindingFileForSaving = false;
-    std::string NameSing;
-    std::cout << "Название песни:" << std::endl;
-    getline(std::cin, NameSing);
-    std::string pathToSing = Directory + "\\" + NameSing;
 
-    std::string AuthorSing;
-    std::cout << "Автор песни:" << std::endl;
-    getline(std::cin, AuthorSing);
-    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
+    std::string pathToSing = InputSingName(Directory);
+    std::string AuthorSingForSearch = InputSingAuthor(Directory);
 
     std::string pathToFileForSaving;
     std::cout << "Введите путь до файла" << std::endl;
     getline(std::cin, pathToFileForSaving);
     std::fstream FileForSaving(pathToFileForSaving);
 
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -245,22 +257,15 @@ void SaveTextSingInFile(std::string Directory)
     }
 }
 
-void PrintTextSing(std::string Directory)
+void PrintTextSing(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
     bool isFindingSing = false;
 
-    std::string NameSing;
-    std::cout << "Название песни:" << std::endl;
-    getline(std::cin, NameSing);
-    std::string pathToSing = Directory + "\\" + NameSing + ".txt";
+    std::string pathToSing = InputSingName(Directory);
+    std::string AuthorSingForSearch = InputSingAuthor(Directory);
 
-    std::string AuthorSing;
-    std::cout << "Автор песни:" << std::endl;
-    getline(std::cin, AuthorSing);
-    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
-
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -297,17 +302,14 @@ void PrintTextSing(std::string Directory)
     }
 }
 
-void PrintSingsByAuthor(std::string Directory)
+void PrintSingsByAuthor(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
     bool isFindingSing = false;
 
-    std::string AuthorSing;
-    std::cout << "Автор песни:" << std::endl;
-    getline(std::cin, AuthorSing);
-    std::string AuthorSingForSearch = "Автор: " + AuthorSing;
+    std::string AuthorSingForSearch = InputSingAuthor(Directory);
 
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -336,7 +338,7 @@ void PrintSingsByAuthor(std::string Directory)
     }
 }
 
-void PrintSingsByWord(std::string Directory)
+void PrintSingsByWord(std::string const& Directory)
 {
     std::cin.ignore(20, '\n');
     bool isFindingSing = false;
@@ -344,7 +346,7 @@ void PrintSingsByWord(std::string Directory)
     std::string word;
     std::cout << "Слово из песни:" << std::endl;
     getline(std::cin, word);
-    for (const auto& entry : std::filesystem::directory_iterator("Sings"))
+    for (const auto& entry : std::filesystem::directory_iterator(Directory))
     {
         std::filesystem::path pathToFile = entry.path();
         std::string pathToFile_str = pathToFile.string();
@@ -380,7 +382,6 @@ void PrintSingsByWord(std::string Directory)
 void Menu()
 {
     std::string Directory = "Sings";
-
     while (true)
     {
         std::cout << std::endl
@@ -395,37 +396,47 @@ void Menu()
         size_t key;
         std::cin >> key;
         std::cout << std::endl;
-        if (key == 1)
+        switch (static_cast<keys>(key))
         {
-            AddSing(Directory);
-        }
-        else if (key == 2)
-        {
-            EditTextInFile(Directory);
-        }
-        else if (key == 3)
-        {
-            DeleteTextSing(Directory);
-        }
-        else if (key == 4)
-        {
-            SaveTextSingInFile(Directory);
-        }
-        else if (key == 5)
-        {
-            PrintTextSing(Directory);
-        }
-        else if (key == 6)
-        {
-            PrintSingsByAuthor(Directory);
-        }
-        else if (key == 7)
-        {
-            PrintSingsByWord(Directory);
-        }
-        else if (key == 0)
-        {
-            break;
+            case Add:
+            {
+                AddSing(Directory);
+                break;
+            }
+            case EditText:
+            {
+                EditTextInFile(Directory);
+                break;
+            }
+            case DeleteText:
+            {
+                DeleteTextSing(Directory);
+                break;
+            }
+            case SaveText:
+            {
+                SaveTextSingInFile(Directory);
+                break;
+            }
+            case PrintText:
+            {
+                PrintTextSing(Directory);
+                break;
+            }
+            case PrintByAuthor:
+            {
+                PrintSingsByAuthor(Directory);
+                break;
+            }
+            case PrintByWord:
+            {
+                PrintSingsByWord(Directory);
+                break;
+            }
+            case Exit:
+            {
+                return;
+            }
         }
     }
 }
